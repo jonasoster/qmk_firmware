@@ -17,6 +17,36 @@
 #include QMK_KEYBOARD_H
 #include "keychron_common.h"
 
+enum unicode_name {
+    lower_a_ring,
+    upper_a_ring,
+    lower_a_diaeresis,
+    upper_a_diaeresis,
+    lower_o_diaeresis,
+    upper_o_diaeresis,
+    lower_u_diaeresis,
+    upper_u_diaeresis,
+    lower_sharp_s,
+};
+
+const uint32_t PROGMEM unicode_map[] = {
+    [lower_a_ring]      = 0x00e5, 
+    [upper_a_ring]      = 0x00c5,
+    [lower_a_diaeresis] = 0x00e4,
+    [upper_a_diaeresis] = 0x00c4,
+    [lower_o_diaeresis] = 0x00f6,
+    [upper_o_diaeresis] = 0x00d6,
+    [lower_u_diaeresis] = 0x00fc,
+    [upper_u_diaeresis] = 0x00dc,
+    [lower_sharp_s]     = 0x00df,
+};
+
+#define U_ARING UP(lower_a_ring, upper_a_ring)
+#define U_ADIA UP(lower_a_diaeresis, upper_a_diaeresis)
+#define U_ODIA UP(lower_o_diaeresis, upper_o_diaeresis)
+#define U_UDIA UP(lower_u_diaeresis, upper_u_diaeresis)
+#define U_SHRPS UM(lower_sharp_s)
+
 #define HRM_A MT(MOD_LGUI,KC_A)
 #define HRM_S MT(MOD_LALT,KC_S)
 #define HRM_D MT(MOD_LCTL,KC_D)
@@ -64,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,    _______,  BT_HST1,  BT_HST2,  BT_HST3,  P2P4G,    _______,   _______,  _______,  _______,  _______,  _______,  _______,   _______,  _______,            _______,
         _______,    RGB_TOG,  RGB_MOD,  _______,  _______,  _______,  _______,   _______,  _______,  S(KC_9),  S(KC_0),  _______,  _______,   _______,  _______,            _______,
         _______,    _______,  _______,  _______,  KC_MINS,  _______,  _______,   KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,  _______,  _______,             _______,            KC_END,
-        _______,    _______,            _______,  _______,  _______,  _______,   BAT_LVL,  BAT_LVL,  NK_TOGG,  _______,  _______,  _______,   _______,  _______,  _______,
+        _______,    _______,            _______,  _______,  _______,  _______,   BAT_LVL,  BAT_LVL,  U_SHRPS,  U_ARING,  U_ADIA,   U_ODIA,    U_UDIA,   _______,  _______,
         _______,    _______,  _______,            _______,  _______,  _______,                       _______,            _______,                       _______,  _______,  _______),
 
     [KBD_FN] = LAYOUT_ansi_89(
